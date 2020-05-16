@@ -13,15 +13,14 @@
 
                 // Enable submit button just if there's text in the input field
                 document.querySelector("#task").onkeyup = () => {
-                    if (document.querySelector("#task").value.length > 0) {
+                    if (document.querySelector("#task").value.length > 0)
                         document.querySelector("#submit").disabled = false;
-                    } else {
+                    else 
                         document.querySelector("#submit").disabled = true;
-                    }
                 };
 
                 // Add item to one of the ul
-                document.querySelector('#new-task').onsubmit = () => {
+                document.querySelector("#new-task").onsubmit = () => {
                     
                     // Create arr of "ul"s ids
                     const arr = ["tasks1", "tasks2", "tasks3", "tasks4"];
@@ -42,6 +41,7 @@
 
                     // Clear input field and disable button again
                     document.querySelector("#task").value = "";
+                    document.querySelector("#submit").disabled = true;
                     
                     // Stop form from submitting
                     return false;
