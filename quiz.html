@@ -22,16 +22,25 @@
             // Create json of the quiz questions
             const questions = [
                 {
-                    question: 'What are the kings of the forest?',
-                    options: ['Lions', 'Tigers', 'Elephants'],
-                    Answer: 'Lions'
-                },
-                {
                     question: 'What is 10 + 10?',
                     options: ['10', '30', '20', '50'],
                     answer: '20'
                 }, 
-
+                {
+                    question: 'How many months we have in the year?',
+                    options: ['5', '6', '12', '20'],
+                    answer: '12'
+                }, 
+                {
+                    question: 'Which animal is known as the ‘Ship of the Desert?’?',
+                    options: ['Camel', 'Lion', 'Tiger', 'Elephant'],
+                    answer: 'Camel'
+                }, 
+                {
+                    question: 'Which planet is known as the Red Planet?',
+                    options: ['Earth', 'Mars', 'Jupiter', 'Venus'],
+                    answer: 'Mars'
+                }
             ];
 
             // Set counters
@@ -43,7 +52,7 @@
                 load_question()
             });      
             
-            // Function load a question 
+            // Load a question function
             function load_question() {
 
                 // Load the question 
@@ -60,12 +69,38 @@
                     options.innerHTML += `<button class="option btn btn-primary p-4 m-2 ">${option}</button>`;
                 });
 
-                // Wait for button to be clicked  
+                // Add onclick event listener to every option   
                 document.querySelectorAll(".option").forEach(option => {
-                    option.onclick = () => {
-                        alert(option.textContent);
-                    }
+                    option.onclick = () => correct_answer(option);
                 });
+
+                // Correct answer function
+                function correct_answer(option) {
+                    
+                    // get the question answer
+                    const answer = questions[question_number].answer 
+
+                    // Answer correction
+                    if (option.textContent == answer) 
+                        correct_answers++;
+                    else 
+                        alert(`Wrong, the right answer is ${answer}`)
+                    
+                    // prepare to load the next question 
+                    question_number++;
+
+                    // Show the result 
+                    document.querySelector('#correct_answers').innerHTML = `Correct questions: ${correct_answers} of ${question_number}`
+                    
+                    // Load the next question if ther's one 
+                    if (questions.length > question_number)
+                        load_question();
+                    else
+                        if (correct_answers >= .5*question_number)
+                            document.querySelector('#result').innerHTML = 'Congratulations, you have passed';
+                        else 
+                            document.querySelector('#result').innerHTML = 'Sorry, you have failed!';
+                };
             };
         </script>
 
@@ -74,7 +109,8 @@
         <h1 class="display-1 m-4">Quiz</h1>
         <h2 id="question" class="text-center"></h2>
         <div id="options" class="d-flex flex-wrap justify-content-center"></div>
-        <div>Correct questions: <span id="correct">0 of 0</span></div>
+        <div id="correct_answers">Correct questions: 0 of 0</div>
+        <div id="result"></div>
         <a class="small text-muted align-self-center my-2" href="index.html">Back to index</a>
 
     </body>
