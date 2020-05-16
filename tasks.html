@@ -1,0 +1,116 @@
+<!Doctype html>
+<html lang="en" class="h-100 d-flex">
+    <head>
+        <title>Tasks</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script>            
+            document.addEventListener("DOMContentLoaded", () => {
+
+                // By default, submit button is disabled 
+                document.querySelector("#submit").disabled = true;
+
+                // Enable submit button just if there's text in the input field
+                document.querySelector("#task").onkeyup = () => {
+                    if (document.querySelector("#task").value.length > 0) {
+                        document.querySelector("#submit").disabled = false;
+                    } else {
+                        document.querySelector("#submit").disabled = true;
+                    }
+                };
+
+                // Add item to one of the ul
+                document.querySelector('#new-task').onsubmit = () => {
+                    
+                    // Create arr of "ul"s ids
+                    const arr = ["tasks1", "tasks2", "tasks3", "tasks4"];
+
+                    // Create new item for the list 
+                    const li = document.createElement("li");                    
+                    li.innerHTML = document.querySelector("#task").value;
+
+                    // Make the item editable
+                    li.setAttribute("contentEditable", true)
+                    
+                    // Append item to the right list 
+                    arr.forEach(element => {
+                        if (document.querySelector("#select").value == element) {
+                            document.querySelector(("#"+element).replace(/\s+/g, '')).append(li);
+                        };  
+                    });
+
+                    // Clear input field and disable button again
+                    document.querySelector("#task").value = "";
+                    
+                    // Stop form from submitting
+                    return false;
+                };
+            });
+        </script>
+        <style>
+            ul {
+                width: 300px;
+            }
+
+            li {
+                margin-left: 20px;
+            } 
+
+            @media (min-width: 500px) {
+                ul {
+                    min-height: 40vh;
+                }                
+            }
+
+            @media (max-width: 499px) {
+                ul {
+                    min-height: 20vh;
+                }
+            }
+            
+        </style>
+    </head>
+    <body class="d-flex flex-column align-items-center w-100 p-4">
+
+        <div class="d-flex flex-row flex-wrap justify-content-center">
+            <h1 class="display-4 mr-4">Tasks</h1>
+        
+            <form id="new-task" class="d-flex flex-column" >
+                <div class="form-group d-flex flex-row">
+                    <input id="task" class="form-control form-control-sm" type="text" placeholder="New task" autofocus autocomplete="off">
+                </div>
+                <div class="d-flex flex-row">
+                    <select id="select" class="form-control form-control-sm mr-2">
+                        <option value="tasks1">Urgent & Important</option>
+                        <option value="tasks2">Urgent & Not important</option>
+                        <option value="tasks3">Not Urgent & Important</option>
+                        <option value="tasks4">Not urgent & Not important</option>
+                    </select>
+                    <input id="submit" class="btn btn-sm btn-primary" type="submit" value="Add">
+                </div>
+            </form>
+        </div>
+
+        <div class="d-flex flex-row flex-wrap justify-content-center w-100 mt-4">
+            <ul id="tasks1" class="alert alert-success shadow-sm m-2">
+                <label class="lead">To Do</label>
+            </ul>
+            <ul id="tasks2" class="alert alert-warning shadow-sm m-2">
+                <label class="lead">To Reconsider</label>
+                
+            </ul>
+            <ul id="tasks3" class="alert alert-primary shadow-sm m-2">
+                <label class="lead">To Plan for</label>
+                
+            </ul>
+            <ul id="tasks4" class="alert alert-secondary shadow-sm m-2">
+                <label class="lead">To Neglect</label>
+                
+            </ul>
+        </div>
+
+        <a class="small text-muted align-self-center my-2" href="index.html">Back to index</a>
+
+    </body>
+</html>
