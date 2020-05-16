@@ -1,0 +1,81 @@
+<!Doctype html>
+<html lang="en" class="h-100 d-flex">
+    <head>
+        <title>Tasks</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <style>
+
+
+            @media (min-width: 500px) {
+           
+            }
+
+            @media (max-width: 499px) {
+
+            }
+            
+        </style>
+        <script>  
+
+            // Create json of the quiz questions
+            const questions = [
+                {
+                    question: 'What are the kings of the forest?',
+                    options: ['Lions', 'Tigers', 'Elephants'],
+                    Answer: 'Lions'
+                },
+                {
+                    question: 'What is 10 + 10?',
+                    options: ['10', '30', '20', '50'],
+                    answer: '20'
+                }, 
+
+            ];
+
+            // Set counters
+            let question_number = 0;
+            let correct_answers = 0;
+
+            // Wait for the content to be loaded 
+            document.addEventListener('DOMContentLoaded', () => {
+                load_question()
+            });      
+            
+            // Function load a question 
+            function load_question() {
+
+                // Load the question 
+                document.querySelector('#question').innerHTML = questions[question_number].question;
+                
+                // Get options array
+                const options = document.querySelector('#options');
+
+                // Clear options of the previous question 
+                options.innerHTML = ''
+
+                // Load options
+                questions[question_number].options.forEach(option => {
+                    options.innerHTML += `<button class="option btn btn-primary p-4 m-2 ">${option}</button>`;
+                });
+
+                // Wait for button to be clicked  
+                document.querySelectorAll(".option").forEach(option => {
+                    option.onclick = () => {
+                        alert(option.textContent);
+                    }
+                });
+            };
+        </script>
+
+    </head>
+    <body class="d-flex flex-column align-items-center w-100 p-4">        
+        <h1 class="display-1 m-4">Quiz</h1>
+        <h2 id="question" class="text-center"></h2>
+        <div id="options" class="d-flex flex-wrap justify-content-center"></div>
+        <div>Correct questions: <span id="correct">0 of 0</span></div>
+        <a class="small text-muted align-self-center my-2" href="index.html">Back to index</a>
+
+    </body>
+</html>
