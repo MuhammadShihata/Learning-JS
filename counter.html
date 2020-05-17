@@ -12,28 +12,29 @@
                 localStorage.setItem('counter', 0);
             }
 
-            let count = parseInt(localStorage.getItem('counter'));
+            let counter = parseInt(localStorage.getItem('counter'));
 
             // Wait for content to be loaded 
             document.addEventListener("DOMContentLoaded", function() {
 
                 // Get the the counter value from local storage 
-                document.querySelector('#counter').innerHTML = count;
+                document.querySelector('#counter').innerHTML = counter;
 
                 // Have each button change the value of the counter
                 document.querySelectorAll('.counter').forEach(function(button) {
                     button.onclick = function() {
+
                         let n = parseInt(button.dataset.val) 
+
                         if (n != 0) {
-                            count += n;
-                            localStorage.setItem('counter', count);
+                            counter += n;
                         } else {
-                            count = n;
-                            localStorage.setItem('counter', count);
+                            counter = n;
                         };
 
-                        // Update the value for the user
-                        document.querySelector('#counter').innerHTML = count;
+                        // Update the counter value
+                        localStorage.setItem('counter', counter);
+                        document.querySelector('#counter').innerHTML = counter;
                     };
                 });
 
