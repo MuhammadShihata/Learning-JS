@@ -6,18 +6,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <script>
-            let count = 0;
+            if (!localStorage.getItem('count')) {
+                localStorage.setItem('count', 0);
+            }
+
+            let count = parseInt(localStorage.getItem('count'));
+
+            
             
             document.addEventListener("DOMContentLoaded", function() {
 
+                document.querySelector('#counter').innerHTML = count;
+                
                 // Have each button change the value of the counter
                 document.querySelectorAll('.count').forEach(function(button) {
                     button.onclick = function() {
                         let n = parseInt(button.dataset.val) 
                         if (n != 0) {
                             count += n;
+                            localStorage.setItem('count', count);
                         } else {
                             count = n;
+                            localStorage.setItem('count', count);
                         };
                         document.querySelector('#counter').innerHTML = count;
                     };
