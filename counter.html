@@ -6,29 +6,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <script>
-            if (!localStorage.getItem('count')) {
-                localStorage.setItem('count', 0);
+
+            // If no counter value in the local storage create one 
+            if (!localStorage.getItem('counter')) {
+                localStorage.setItem('counter', 0);
             }
 
-            let count = parseInt(localStorage.getItem('count'));
+            let count = parseInt(localStorage.getItem('counter'));
 
-            
-            
+            // Wait for content to be loaded 
             document.addEventListener("DOMContentLoaded", function() {
 
+                // Get the the counter value from local storage 
                 document.querySelector('#counter').innerHTML = count;
-                
+
                 // Have each button change the value of the counter
-                document.querySelectorAll('.count').forEach(function(button) {
+                document.querySelectorAll('.counter').forEach(function(button) {
                     button.onclick = function() {
                         let n = parseInt(button.dataset.val) 
                         if (n != 0) {
                             count += n;
-                            localStorage.setItem('count', count);
+                            localStorage.setItem('counter', count);
                         } else {
                             count = n;
-                            localStorage.setItem('count', count);
+                            localStorage.setItem('counter', count);
                         };
+
+                        // Update the value for the user
                         document.querySelector('#counter').innerHTML = count;
                     };
                 });
@@ -40,9 +44,9 @@
         <h1 class="display-4">Counter</h1>
         <h2 class="display-1" id="counter">0</h2>
         <div class="d-flex mt-4">
-            <button class="count btn btn-success shadow-sm mr-2" data-val="1">Add</button>
-            <button class="count btn btn-warning shadow-sm mr-2" data-val="-1">Sub</button>
-            <button class="count btn btn-danger shadow-sm" data-val="0">Reset</button>
+            <button class="counter btn btn-success shadow-sm mr-2" data-val="1">Add</button>
+            <button class="counter btn btn-warning shadow-sm mr-2" data-val="-1">Sub</button>
+            <button class="counter btn btn-danger shadow-sm" data-val="0">Reset</button>
         </div>
         <a class="small text-muted mt-4" href="index.html">Back to index</a>
     </body>
