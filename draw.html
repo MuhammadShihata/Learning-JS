@@ -2,6 +2,8 @@
 <html>
     <head>
         <title>Draw</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <script src="https://d3js.org/d3.v5.min.js"></script>
     </head>
@@ -9,13 +11,13 @@
         <h1 class="display-4 text-center">Draw</h1>
         <div class="d-flex">
             <form class="d-flex">
-                <select id="color" class="form-control form-control-sm mr-2" style="width: 100px;">
+                <select id="color" class="form-control mr-2" style="width: 100px;">
                     <option value="black" selected>Black</option>
                     <option value="red">Red</option>
                     <option value="blue">Blue</option>
                     <option value="green">Green</option>
                 </select>
-                <select id="size" class="form-control form-control-sm mr-2">
+                <select id="size" class="form-control mr-2">
                     <option value="1">1</option>
                     <option value="2" selected>2</option>
                     <option value="3">3</option>
@@ -30,7 +32,7 @@
                     <option value="12">12</option>
                 </select>
             </form>
-            <button id="erase" class="btn btn-sm btn-primary">Erase</button>
+            <button id="erase" class="btn btn-primary">Erase</button>
         </div>
         <svg id="svg" style="width: 100%; height: 68vh;" class="shadow-sm border mt-4"></svg>
         <a class="small text-muted align-self-center my-2" href="index.html">Back to index</a>
@@ -43,10 +45,16 @@
         let size;
 
         function draw_point() {
+            
             if (!drawing)
                 return;
 
-            const coords2 = d3.mouse(this);
+            let coords2;
+            if (d3.mouse(this))
+                coords2 = d3.mouse(this);
+            else
+                coords2 = d3.touches(this);
+
 
             if (!coords1)
                 coords1 = coords2;
@@ -77,8 +85,23 @@
             color = document.querySelector('#color').value;
             size = parseInt(document.querySelector('#size').value);
         });
-        
+
         svg.on('mouseup', () => {
+            drawing = false;
+            coords1 = null;
+        });
+
+
+        // Same triggers for Touchscreens
+        svg.on('touchmove', draw_point);
+
+        svg.on('touchstart', () => {
+            drawing = true;
+            color = document.querySelector('#color').value;
+            size = parseInt(document.querySelector('#size').value);
+        });
+        
+        svg.on('touchend', () => {
             drawing = false;
             coords1 = null;
         });
