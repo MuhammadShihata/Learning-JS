@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Draw</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+    </head>
+    <body class="d-flex flex-column p-4">
+        <h1 class="display-4 text-center">Draw</h1>
+        <form class="d-flex" style="width:300px;">
+            <select id="color" class="form-control form-control-sm mr-2">
+                <option value="black" selected>Black</option>
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+            </select>
+            <select id="size" class="form-control form-control-sm mr-2">
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <button id="erase" class="btn btn-sm btn-primary">Erase</button>
+        </form>
+        <svg id="svg" style="width: 100%; height: 68vh;" class="shadow-sm border mt-4"></svg>
+        <a class="small text-muted align-self-center my-2" href="index.html">Back to index</a>
+    </body>
+    <script>
+        const svg = d3.select('#svg');
+        let drawing = false;
+        let coords1;
+        let color;
+        let size;
+
+        function draw_point() {
+            if (!drawing)
+                return;
+
+            const coords2 = d3.mouse(this);
+
+            if (!coords1)
+                coords1 = coords2;
+
+            svg.append('line')
+                .attr("x1", coords1[0])
+                .attr("y1", coords1[1])
+                .attr("x2", coords2[0])
+                .attr("y2", coords2[1])
+                .style("stroke-width", size*2)
+                .style("stroke", color)
+
+
+            svg.append('circle')
+                .attr('cx', coords2[0])
+                .attr('cy', coords2[1])
+                .attr('r', size)
+                .style('fill',color)
+
+
+            coords1 = coords2;
+        }
+
+        svg.on('mousemove', draw_point);
+
+        svg.on('mousedown', () => {
+            drawing = true;
+            color = document.querySelector('#color').value;
+            size = parseInt(document.querySelector('#size').value);
+        });
+        
+        svg.on('mouseup', () => {
+            drawing = false;
+            coords1 = null;
+        });
+
+        document.querySelector('#erase').addEventListener('click', () => svg.selectAll('*').remove());
+    </script>
+</html>
