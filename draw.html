@@ -7,29 +7,31 @@
     </head>
     <body class="d-flex flex-column p-4">
         <h1 class="display-4 text-center">Draw</h1>
-        <form class="d-flex" style="width:300px;">
-            <select id="color" class="form-control form-control-sm mr-2">
-                <option value="black" selected>Black</option>
-                <option value="red">Red</option>
-                <option value="blue">Blue</option>
-                <option value="green">Green</option>
-            </select>
-            <select id="size" class="form-control form-control-sm mr-2">
-                <option value="1">1</option>
-                <option value="2" selected>2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-            </select>
+        <div class="d-flex">
+            <form class="d-flex">
+                <select id="color" class="form-control form-control-sm mr-2" style="width: 100px;">
+                    <option value="black" selected>Black</option>
+                    <option value="red">Red</option>
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                </select>
+                <select id="size" class="form-control form-control-sm mr-2">
+                    <option value="1">1</option>
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </form>
             <button id="erase" class="btn btn-sm btn-primary">Erase</button>
-        </form>
+        </div>
         <svg id="svg" style="width: 100%; height: 68vh;" class="shadow-sm border mt-4"></svg>
         <a class="small text-muted align-self-center my-2" href="index.html">Back to index</a>
     </body>
