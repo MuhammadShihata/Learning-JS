@@ -66,44 +66,33 @@
                 .style("stroke-width", size*2)
                 .style("stroke", color)
 
-
             svg.append('circle')
                 .attr('cx', coords2[0])
                 .attr('cy', coords2[1])
                 .attr('r', size)
                 .style('fill',color)
 
-
             coords1 = coords2;
         }
 
         svg.on('mousemove', draw_point);
+        svg.on('mousedown', start);
+        svg.on('mouseup', end);
 
-        svg.on('mousedown', () => {
-            drawing = true;
-            color = document.querySelector('#color').value;
-            size = parseInt(document.querySelector('#size').value);
-        });
-
-        svg.on('mouseup', () => {
-            drawing = false;
-            coords1 = null;
-        });
-
-
-        // Same triggers for Touchscreens
         svg.on('touchmove', draw_point);
+        svg.on('touchstart',start);
+        svg.on('touchend', end);
 
-        svg.on('touchstart', () => {
+        function start() {
             drawing = true;
             color = document.querySelector('#color').value;
             size = parseInt(document.querySelector('#size').value);
-        });
-        
-        svg.on('touchend', () => {
+        }
+
+        function end() {
             drawing = false;
             coords1 = null;
-        });
+        }
 
         document.querySelector('#erase').addEventListener('click', () => svg.selectAll('*').remove());
     </script>
