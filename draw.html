@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <script src="https://d3js.org/d3.v5.min.js"></script>
     </head>
-    <body class="d-flex flex-column p-4">
+    <body class="d-flex flex-column p-4" style="overflow-y: hidden;">
         <h1 class="display-4 text-center">Draw</h1>
         <div class="d-flex">
             <form class="d-flex">
@@ -54,7 +54,6 @@
                 coords2 = d3.mouse(this);
             else
                 coords2 = d3.touches(this);
-
 
             if (!coords1)
                 coords1 = coords2;
