@@ -13,7 +13,7 @@
                 document.querySelector("#form").onsubmit = () => {
                     
                     // Get submitted values and store them 
-                    const base = document.querySelector('#base').toUpperCase();
+                    const base = document.querySelector('#base').value.toUpperCase();
                     const currency = document.querySelector('#currency').value.toUpperCase();
                     
                     // Fetch for the currency rate based on USD rete & show the result 
