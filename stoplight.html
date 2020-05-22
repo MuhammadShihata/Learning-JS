@@ -1,0 +1,61 @@
+<!DOCTYPE html> 
+<html lang="en" class="h-100 d-flex justify-content-center align-items-center">
+    <head>
+        <title>Stoplight</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+    </head>
+    <body>
+        <svg id="svg" style="width: 200px; height:500px; border: 1px solid black;"></svg>
+    </body>
+    <script>
+        const svg = d3.select('#svg');
+
+        svg.append('rect')
+            .attr('x', 0)
+            .attr('y', 0)
+            .attr('width', 200)
+            .attr('height', 500)
+            .style('fill', 'black');
+
+        red = svg.append('circle')
+                .attr('cx', 100)
+                .attr('cy', 90)
+                .attr('r', 75)
+                .attr('fill', 'grey')
+
+        yellow = svg.append('circle')
+                .attr('cx', 100)
+                .attr('cy', 250)
+                .attr('r', 75)
+                .attr('fill', 'grey')
+
+        green = svg.append('circle')
+                .attr('cx', 100)
+                .attr('cy', 410)
+                .attr('r', 75)
+                .attr('fill', 'grey')
+
+        red.on('click', () => {
+            red.style('fill', 'red');
+            yellow.style('fill', 'grey');
+            green.style('fill', 'grey');
+        });
+
+        
+        yellow.on('click', () => {
+            red.style('fill', 'grey');
+            yellow.style('fill', 'yellow');
+            green.style('fill', 'grey');
+        });
+
+        
+        green.on('click', () => {
+            red.style('fill', 'grey');
+            yellow.style('fill', 'grey');
+            green.style('fill', 'green');
+        });
+    </script>
+</html>
